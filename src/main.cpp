@@ -1,8 +1,9 @@
 /**
-   Arduino Electronic Safe
+   Caja fuerte electrónica Arduino
 
-   Copyright (C) 2020, Uri Shaked.
-   Released under the MIT License.
+Copyright © 2020, Uri Shaked.
+
+Publicado bajo la Licencia MIT.
 */
 
 #include <LiquidCrystal.h>
@@ -11,16 +12,16 @@
 #include "SafeState.h"
 #include "icons.h"
 
-/* Locking mechanism definitions */
+/*Definiciones de mecanismos de bloqueo */
 #define SERVO_PIN 6
 #define SERVO_LOCK_POS   20
 #define SERVO_UNLOCK_POS 90
 Servo lockServo;
 
-/* Display */
+/* Mostrar */
 LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
 
-/* Keypad setup */
+/* Configuración del teclado */
 const byte KEYPAD_ROWS = 4;
 const byte KEYPAD_COLS = 4;
 byte rowPins[KEYPAD_ROWS] = {5, 4, 3, 2};
@@ -34,7 +35,7 @@ char keys[KEYPAD_ROWS][KEYPAD_COLS] = {
 
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-/* SafeState stores the secret code in EEPROM */
+/* SafeState almacena el código secreto en la EEPROM. */
 SafeState safeState;
 
 void lock() {
@@ -192,7 +193,7 @@ void setup() {
 
   lockServo.attach(SERVO_PIN);
 
-  /* Make sure the physical lock is sync with the EEPROM state */
+  /* Asegúrese de que el bloqueo físico esté sincronizado con el estado de la EEPROM. */
   Serial.begin(115200);
   if (safeState.locked()) {
     lock();
